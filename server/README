@@ -1,0 +1,5 @@
+
+routes are in their own folder
+due to small project size, no need to decouple routes from controllers.
+
+TODO: how to decouple routes from controllers?

@@ -1,0 +1,15 @@
+To run Vite:
+  npm install
+  npm run dev
+
+
+react-redux = state management library (most recommended)
+react-dropzone = drag and drop to add files
+
+
+Chat - https://chatengine.io/projects/29156ce3-1f18-4bc1-952d-cd03b2721ce5
+  ProjectID: 29156ce3-1f18-4bc1-952d-cd03b2721ce5
+  Private Key: 6d7be8be-5d40-457e-9533-f828e08002c9
+
+
+To create base to start from: in new file, type "rfce"
