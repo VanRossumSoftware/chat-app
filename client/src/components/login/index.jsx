@@ -1,29 +1,27 @@
-import { useState, useEffect } from 'react'
-import { usePostLoginMutation, usePostSignonMutation } from '../state/api'
+import { useState, useEffect } from "react";
+import { usePostLoginMutation, usePostSignUpMutation } from "@/state/api";
 
 const Login = ({ setUser, setSecret }) => {
   const [isRegister, setIsRegister] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [triggerLogin, resultLogin] = usePostLoginMutation();
-  const [triggerSignUp] = usePostSignonMutation();
+  const [triggerSignUp] = usePostSignUpMutation();
 
   const handleLogin = () => {
+    console.log("handle login");
+    console.log("username: ", username);
+    console.log("password", password);
     triggerLogin({ username, password });
   };
 
   const handleRegister = () => {
     triggerSignUp({ username, password });
+    console.log("handle login");
   };
 
   useEffect(() => {
-    console.log("set user login page: ", JSON.stringify(resultLogin.data));
-
-    if (resultLogin?.data) {
-      console.log("set user login page - setting user stuff");
-      console.log("username: ", username);
-      console.log("password: ", password);
-
+    if (resultLogin.data?.response) {
       setUser(username);
       setSecret(password);
     }

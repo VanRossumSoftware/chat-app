@@ -1,43 +1,42 @@
-import { useState } from 'react'
-import MessageFormUI from './MessageFormUI'
-import { usePostAiCodeMutation } from '../state/api';
+import { usePostAiCodeMutation } from "@/state/api";
+import React, { useState } from "react";
+import MessageFormUI from "./MessageFormUI";
 
-const AiCode = ({props, activeChat}) => {
-  //console.log("activeChat", activeChat)
-  //console.log("props", props)
-  const [message, setMessge] = useState("");
+const AiCode = ({ props, activeChat }) => {
+  const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState("");
-  const [trigger] = usePostAiCodeMutation();
+  const [triggerCode] = usePostAiCodeMutation();
 
-  const handleChange = (e) => setMessge(e.target.value);
+  const handleChange = (e) => setMessage(e.target.value);
 
   const handleSubmit = async () => {
-    const date = new Date().toISOString().replace("T", " ").replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
-      const att = attachment ? [{blob: attachment, file: attachment.name}] : [];
-      const form = {
-        attachments: att,
-        created: date,
-        sender_username: props.username,
-        text: message,
-        activeChatId: activeChat.id
-      }
+    const date = new Date()
+      .toISOString()
+      .replace("T", " ")
+      .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
+    const at = attachment ? [{ blob: attachment, file: attachment.name }] : [];
+    const form = {
+      attachments: at,
+      created: date,
+      sender_username: props.username,
+      text: message,
+      activeChatId: activeChat.id,
+    };
 
-      props.onSubmit(form);
-      trigger(form);
-      setMessge("");
-      setAttachment("");
-  }
+    props.onSubmit(form);
+    triggerCode(form);
+    setMessage("");
+    setAttachment("");
+  };
 
   return (
-    <div>
-      <MessageFormUI 
-        setAttachment = {setAttachment}
-        message = {message}
-        handleChange = {handleChange}
-        handleSubmit = {handleSubmit}
-      />
-    </div>
-  )
+    <MessageFormUI
+      setAttachment={setAttachment}
+      message={message}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+    />
+  );
 };
 
 export default AiCode;
